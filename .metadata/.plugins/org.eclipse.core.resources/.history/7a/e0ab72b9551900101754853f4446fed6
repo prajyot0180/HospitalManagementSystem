@@ -1,0 +1,78 @@
+package com.prajyot.hms.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "courier", schema = "public")
+public class Courier {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "courierid")
+    private Integer courierId;
+
+    @ManyToOne
+    @JoinColumn(
+        name = "patientid", 
+        referencedColumnName = "patientid", 
+        foreignKey = @ForeignKey(name = "courier_patientid_fkey")
+    )
+    private Patient patient;
+
+    @ManyToOne
+    @JoinColumn(
+        name = "medicineid", 
+        referencedColumnName = "medicineid", 
+        foreignKey = @ForeignKey(name = "courier_medicineid_fkey")
+    )
+    private Medicine medicine;
+
+    @Column(name = "deliverydate")
+    private LocalDate deliveryDate;
+
+    @Column(name = "status")
+    private String status = "Processing";  // Default value
+
+    // Getters and Setters
+
+    public Integer getCourierId() {
+        return courierId;
+    }
+
+    public void setCourierId(Integer courierId) {
+        this.courierId = courierId;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

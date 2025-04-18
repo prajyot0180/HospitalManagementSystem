@@ -1,0 +1,61 @@
+package com.prajyot.hms.entity;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "medicinepreparation", schema = "public")
+public class MedicinePreparation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "prepid")
+    private Integer prepId;
+
+    @ManyToOne
+    @JoinColumn(
+        name = "medicineid", 
+        referencedColumnName = "medicineid", 
+        foreignKey = @ForeignKey(name = "medicinepreparation_medicineid_fkey")
+    )
+    private Medicine medicine;
+
+    @Column(name = "doses", nullable = false)
+    private Integer doses;
+
+    @Column(name = "status")
+    private String status = "Pending";  // Default value
+
+    // Getters and Setters
+
+    public Integer getPrepId() {
+        return prepId;
+    }
+
+    public void setPrepId(Integer prepId) {
+        this.prepId = prepId;
+    }
+
+    public Medicine getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
+    }
+
+    public Integer getDoses() {
+        return doses;
+    }
+
+    public void setDoses(Integer doses) {
+        this.doses = doses;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

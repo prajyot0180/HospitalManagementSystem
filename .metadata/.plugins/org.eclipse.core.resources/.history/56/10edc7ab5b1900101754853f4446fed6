@@ -1,0 +1,31 @@
+package com.prajyot.hms.service;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.prajyot.hms.entity.Patient;
+import com.prajyot.hms.repository.PatientRepository;
+import com.prajyot.hms.serviceInterface.PatientServiceInterface;
+
+@Service
+public class patientService implements PatientServiceInterface {
+
+	@Autowired
+	PatientRepository patientRepository;
+	
+	@Override
+	public Page<Patient> getAllPatients(int page, int size) {
+		try {
+			Pageable pageable = PageRequest.of(page, size);
+			return patientRepository.findAll(pageable);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

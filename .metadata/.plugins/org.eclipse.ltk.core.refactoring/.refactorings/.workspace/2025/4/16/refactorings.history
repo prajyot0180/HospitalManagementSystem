@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 0 elements to &apos;hms/src/main/java/com.prajyot.hms.mapper&apos;&#x0D;&#x0A;- Destination element: &apos;hms/src/main/java/com.prajyot.hms.mapper&apos;" description="Copy compilation units" destination="=hms/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.prajyot.hms.mapper" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1744653394456" units="0" version="1.0"/>
+</session>

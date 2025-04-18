@@ -1,0 +1,152 @@
+package com.prajyot.hms.entity;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@Table(name = "patients", schema = "public")
+public class Patient {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "patientid")
+    private Integer patientId;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "gender", nullable = false)
+    private String gender;
+
+    @Column(name = "dob", nullable = false)
+    private LocalDate dob;
+
+    @Column(name = "maritalstatus")
+    private String maritalStatus;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @Column(name = "vipstatus")
+    private Boolean vipStatus = false;
+
+    @Column(name = "referredby")
+    private String referredBy;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "familycode", referencedColumnName = "familycode", foreignKey = @ForeignKey(name = "patients_familycode_fkey"))
+    @JsonIgnoreProperties("familyHead")
+    private Family family;
+
+    @Column(name = "wpnumber")
+    private String wpNumber;
+
+    @Column(name = "mobilenumber")
+    private String mobileNumber;
+
+	public Integer getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public LocalDate getDob() {
+		return dob;
+	}
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getVipStatus() {
+		return vipStatus;
+	}
+
+	public void setVipStatus(Boolean vipStatus) {
+		this.vipStatus = vipStatus;
+	}
+
+	public String getReferredBy() {
+		return referredBy;
+	}
+
+	public void setReferredBy(String referredBy) {
+		this.referredBy = referredBy;
+	}
+
+	public Family getFamily() {
+		return family;
+	}
+
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+
+	public String getWpNumber() {
+		return wpNumber;
+	}
+
+	public void setWpNumber(String wpNumber) {
+		this.wpNumber = wpNumber;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+    
+    
+}
+
