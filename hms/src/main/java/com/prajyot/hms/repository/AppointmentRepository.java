@@ -1,6 +1,7 @@
 package com.prajyot.hms.repository;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,5 +16,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	Page<Appointment> findByDateAndStatus(LocalDate dt, String status, Pageable pageable);
 
 	Page<Appointment> findByDate(LocalDate dt, Pageable pageable);
+
+	Optional<Appointment> findByPatientId(int patientId);
 
 }
