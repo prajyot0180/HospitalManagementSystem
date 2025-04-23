@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import com.prajyot.hms.serviceInterface.PatientServiceInterface;
 
 @RestController
 @RequestMapping("/doctor")
+@CrossOrigin("*")
 public class DoctorController {
 
 	@Autowired
@@ -74,8 +77,8 @@ public class DoctorController {
 		}
 	}
 	
-	@GetMapping("/patient")
-	public ResponseEntity<?> getPatientByName(@RequestParam String name,@RequestParam(defaultValue = "0") int page ,@RequestParam(defaultValue = "10") int size){
+	@GetMapping("/patient/{name}")
+	public ResponseEntity<?> getPatientByName(@PathVariable String name,@RequestParam(defaultValue = "0") int page ,@RequestParam(defaultValue = "10") int size){
 		try {
 			Page<Patient> patients = patientServiceInterface.getPatientByName(name,page,size);
 			if(!patients.isEmpty()) {
@@ -190,10 +193,13 @@ public class DoctorController {
 		}
 	}
 	
-	@PostMapping("/updateAppointment")
-	public ResponseEntity<?> updateAppointment(@RequestParam int patientId){
+	@PostMapping("/updateAppointment/{patientId}/{status}")
+	public ResponseEntity<?> updateAppointment(@PathVariable int patientId,@PathVariable String status){
+		
 		try {
-			boolean result = appointmentServiceInterface.updateAppointment(patientId);
+			System.out.println(patientId);
+			System.out.println(status);
+			boolean result = appointmentServiceInterface.updateAppointment(patientId,status);
 			if(result) {
 				 return ResponseEntity.status(HttpStatus.OK).body("Appointment updated");
 			}else {
