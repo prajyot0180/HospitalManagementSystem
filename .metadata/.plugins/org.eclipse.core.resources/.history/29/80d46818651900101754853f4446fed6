@@ -1,7 +1,0 @@
-package com.prajyot.hms.service;
-
-import com.prajyot.hms.serviceInterface.AppointmentServiceInterface;
-
-public class appointmentService implements AppointmentServiceInterface {
-
-}

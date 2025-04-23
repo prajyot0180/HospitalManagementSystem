@@ -1,5 +1,0 @@
-package com.prajyot.hms.serviceInterface;
-
-public interface AppointmentServiceInterface {
-
-}

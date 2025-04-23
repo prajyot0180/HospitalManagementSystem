@@ -1,9 +1,0 @@
-package com.prajyot.hms.serviceInterface;
-
-import com.prajyot.hms.entity.Appointment;
-
-public interface AppointmentServiceInterface {
-
-	Appointment bookAppointment(Appointment appointment);
-
-}

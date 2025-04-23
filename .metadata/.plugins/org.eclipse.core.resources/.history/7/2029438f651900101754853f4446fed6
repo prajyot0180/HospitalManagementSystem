@@ -1,9 +1,0 @@
-package com.prajyot.hms.serviceInterface;
-
-import com.prajyot.hms.dto.AppointmentDTO;
-
-public interface AppointmentServiceInterface {
-
-	Boolean bookAppointment(AppointmentDTO dto);
-
-}

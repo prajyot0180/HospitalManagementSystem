@@ -1,9 +1,0 @@
-package com.prajyot.hms.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.prajyot.hms.entity.Appointment;
-
-public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
-
-}
