@@ -72,11 +72,10 @@ public class AppointmentService implements AppointmentServiceInterface {
 	}
 
 	@Override
-	public boolean updateAppointment(int patientId, String status) {
-//		String status = "Completed";
+	public boolean updateAppointment(int patientId) {
+		String status = "Completed";
 		if( appointmentRepository.existsById(patientId)) {
-			 Optional<Appointment> optional = appointmentRepository.findByPatientId(patientId);
-			 System.out.println(optional.get());
+			 Optional<Appointment> optional = appointmentRepository.findById(patientId);
 			 if(optional.isPresent()) {
 				 Appointment appointment = optional.get();
 				 appointment.setStatus(status);

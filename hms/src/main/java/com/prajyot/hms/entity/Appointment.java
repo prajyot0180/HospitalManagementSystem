@@ -13,23 +13,21 @@ public class Appointment {
     @Column(name = "appointmentid")
     private Integer appointmentId;
 
-//    @ManyToOne
-//    @JoinColumn(
-//        name = "patientid", 
-//        referencedColumnName = "patientid", 
-//        foreignKey = @ForeignKey(name = "appointments_patientid_fkey")
-//    )
-    @Column(name = "patientid", nullable = false)
-    private int patientId;
+    @ManyToOne
+    @JoinColumn(
+        name = "patientid", 
+        referencedColumnName = "patientid", 
+        foreignKey = @ForeignKey(name = "appointments_patientid_fkey")
+    )
+    private Patient patient;
 
-//    @ManyToOne
-//    @JoinColumn(
-//        name = "doctorid", 
-//        referencedColumnName = "doctorid", 
-//        foreignKey = @ForeignKey(name = "appointments_doctorid_fkey")
-//    )
-    @Column(name = "doctorid", nullable = false)
-    private int doctorId;
+    @ManyToOne
+    @JoinColumn(
+        name = "doctorid", 
+        referencedColumnName = "doctorid", 
+        foreignKey = @ForeignKey(name = "appointments_doctorid_fkey")
+    )
+    private Doctor doctor;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
@@ -53,20 +51,20 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    public int getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public int getDoctorId() {
-        return doctorId;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public LocalDate getDate() {

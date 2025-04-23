@@ -17,6 +17,6 @@ public interface AppointmentServiceInterface {
 
 	boolean cancleAppointment(int patientId);
 
-	boolean updateAppointment(int patientId, String status);
+	boolean updateAppointment(int patientId);
 
 }
