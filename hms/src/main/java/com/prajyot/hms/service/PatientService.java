@@ -1,5 +1,6 @@
 package com.prajyot.hms.service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,18 @@ public class PatientService implements PatientServiceInterface {
 			return null;
 		}
 	}
+	
+	@Override
+	public Page<Patient> getBirthdayPatient(int page, int size) {
+		try {
+			Pageable pageable = PageRequest.of(page, size);
+			return  patientRepository.findByDob(LocalDate.now(),pageable);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 	@Override
 	public boolean addPatient(Patient patient) {
@@ -51,16 +64,33 @@ public class PatientService implements PatientServiceInterface {
 		Optional<Patient> optional = patientRepository.findById(oldPatient.getPatientId());
 		Patient patient = optional.get();
 		patient.setAddress(oldPatient.getAddress());
-		patient.setDob(null);
-		patient.setEmail(null);
-		patient.setGender(null);
-		patient.setMaritalStatus(null);
-		patient.setMobileNumber(null);
-		patient.setVipStatus(null);
-		patient.setWpNumber(null);
+		patient.setDob(oldPatient.getDob());
+		patient.setEmail(oldPatient.getEmail());
+		patient.setGender(oldPatient.getGender());
+		patient.setMaritalStatus(oldPatient.getMaritalStatus());
+		patient.setMobileNumber(oldPatient.getMobileNumber());
+		patient.setVipStatus(oldPatient.getVipStatus());
+		patient.setWpNumber(oldPatient.getWpNumber());
 		
 		Patient checkAdded = patientRepository.save(patient);
 		return checkAdded != null;
 	}
 
+	@Override
+	public boolean deletePatient(int id) {
+		Optional<Patient> optional = patientRepository.findById(id);
+		Patient patient = optional.get();
+		patient.setStatus(false);
+		
+		Patient checkDeleted = patientRepository.save(patient);
+		return checkDeleted != null;
+	}
+
+	@Override
+	public long totalPatients() {
+		long totalPatients = patientRepository.count();
+		return totalPatients;
+	}
+
+	
 }

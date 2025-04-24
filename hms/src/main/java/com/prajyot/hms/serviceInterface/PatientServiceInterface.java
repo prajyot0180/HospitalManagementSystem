@@ -16,4 +16,10 @@ public interface PatientServiceInterface {
 
 	boolean updatePatient(Patient patient);
 
+	boolean deletePatient(int id);
+
+	long totalPatients();
+
+	Page<Patient> getBirthdayPatient(int page, int size);
+
 }

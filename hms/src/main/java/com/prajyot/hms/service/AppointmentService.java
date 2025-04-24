@@ -73,7 +73,6 @@ public class AppointmentService implements AppointmentServiceInterface {
 
 	@Override
 	public boolean updateAppointment(int patientId, String status) {
-//		String status = "Completed";
 		if( appointmentRepository.existsById(patientId)) {
 			 Optional<Appointment> optional = appointmentRepository.findByPatientId(patientId);
 			 System.out.println(optional.get());
@@ -86,6 +85,38 @@ public class AppointmentService implements AppointmentServiceInterface {
 		}else {
 			return false;
 		}
+	}
+
+	@Override
+	public long totalAppointment() {
+		return appointmentRepository.count();
+	}
+
+	@Override
+	public long remainingAppointment() {
+		return appointmentRepository.countByStatus("Pending");
+		 
+	}
+
+	@Override
+	public long checkedAppointment() {
+		return appointmentRepository.countByStatus("Completed");
+	}
+
+	@Override
+	public long todaysTotalAppointment() {
+		
+		return appointmentRepository.countByDate(LocalDate.now());
+	}
+
+	@Override
+	public long morningAppointment() {
+		return appointmentRepository.countBySession("Morning Session");
+	}
+
+	@Override
+	public long eveningAppointment() {
+		return appointmentRepository.countBySession("Evening Session");
 	}
 
 }

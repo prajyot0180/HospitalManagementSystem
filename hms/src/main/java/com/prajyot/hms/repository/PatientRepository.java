@@ -1,5 +1,6 @@
 package com.prajyot.hms.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -13,4 +14,6 @@ import com.prajyot.hms.entity.Patient;
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
 	Page<Patient> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+	Page<Patient> findByDob(LocalDate now, Pageable pageable);
 }

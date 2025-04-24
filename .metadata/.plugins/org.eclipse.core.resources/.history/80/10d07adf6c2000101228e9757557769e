@@ -1,0 +1,21 @@
+spring.application.name=hms
+
+
+# application.properties
+spring.datasource.url=jdbc:postgresql://db.esivvuecbltppddjwfnn.supabase.co:5432/postgres
+#spring.datasource.url=jdbc:postgresql://aws-0-ap-south-1.pooler.supabase.com:5432/postgres?user=postgres.esivvuecbltppddjwfnn
+#spring.datasource.url=jdbc:postgresql://db.esivvuecbltppddjwfnn.supabase.co:5432/postgres
+spring.datasource.username=postgres
+spring.datasource.password=TeamXpune0909
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Optional: Hibernate settings
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+spring.datasource.hikari.maximum-pool-size=20 
+spring.datasource.hikari.minimum-idle=5 
+spring.datasource.hikari.idle-timeout=30000 
+spring.datasource.hikari.max-lifetime=1800000 
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.leak-detection-threshold=5000

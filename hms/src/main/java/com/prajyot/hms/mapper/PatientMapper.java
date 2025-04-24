@@ -18,6 +18,7 @@ public class PatientMapper {
         patientDTO.setReferredBy(patient.getReferredBy());
         patientDTO.setWpNumber(patient.getWpNumber());
         patientDTO.setMobileNumber(patient.getMobileNumber());
+        patientDTO.setStatus(patient.isStatus());
         return patientDTO;
     }
 }

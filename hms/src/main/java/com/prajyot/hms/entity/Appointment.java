@@ -13,21 +13,9 @@ public class Appointment {
     @Column(name = "appointmentid")
     private Integer appointmentId;
 
-//    @ManyToOne
-//    @JoinColumn(
-//        name = "patientid", 
-//        referencedColumnName = "patientid", 
-//        foreignKey = @ForeignKey(name = "appointments_patientid_fkey")
-//    )
     @Column(name = "patientid", nullable = false)
     private int patientId;
 
-//    @ManyToOne
-//    @JoinColumn(
-//        name = "doctorid", 
-//        referencedColumnName = "doctorid", 
-//        foreignKey = @ForeignKey(name = "appointments_doctorid_fkey")
-//    )
     @Column(name = "doctorid", nullable = false)
     private int doctorId;
 

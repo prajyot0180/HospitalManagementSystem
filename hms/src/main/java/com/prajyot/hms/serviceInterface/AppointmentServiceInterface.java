@@ -19,4 +19,17 @@ public interface AppointmentServiceInterface {
 
 	boolean updateAppointment(int patientId, String status);
 
+	long totalAppointment();
+
+	long remainingAppointment();
+
+	long checkedAppointment();
+
+	long todaysTotalAppointment();
+
+	long morningAppointment();
+
+	long eveningAppointment();
+
+
 }

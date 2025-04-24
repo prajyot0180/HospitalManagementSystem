@@ -15,6 +15,7 @@ public class PatientDTO {
     private String referredBy;
     private String wpNumber;
     private String mobileNumber;
+    private boolean status;
 
     // Getters and Setters
 
@@ -105,4 +106,12 @@ public class PatientDTO {
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 }

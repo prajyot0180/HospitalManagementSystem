@@ -1,0 +1,24 @@
+package com.prajyot.hms.serviceInterface;
+
+import org.springframework.data.domain.Page;
+
+import com.prajyot.hms.entity.Appointment;
+import com.prajyot.hms.entity.Patient;
+
+public interface AppointmentServiceInterface {
+
+	boolean bookAppointment(Appointment appointment);
+
+	Page<Appointment> allAppointment(int page, int size);
+
+	Page<Appointment> pendingAppointment(int page, int size);
+
+	Page<Appointment> completedAppointment(int page, int size);
+
+	boolean cancleAppointment(int patientId);
+
+	boolean updateAppointment(int patientId, String status);
+
+	long totalAppointment;
+
+}

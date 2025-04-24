@@ -1,0 +1,91 @@
+package com.prajyot.hms.service;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.prajyot.hms.dto.AppointmentDTO;
+import com.prajyot.hms.entity.Appointment;
+import com.prajyot.hms.entity.Patient;
+import com.prajyot.hms.mapper.AppointmentMapper;
+import com.prajyot.hms.repository.AppointmentRepository;
+import com.prajyot.hms.serviceInterface.AppointmentServiceInterface;
+
+@Service
+public class AppointmentService implements AppointmentServiceInterface {
+
+	@Autowired
+	AppointmentRepository appointmentRepository;
+	
+	@Override
+	public boolean bookAppointment(Appointment appointment) {
+		Appointment apt =  appointmentRepository.save(appointment);
+		return apt != null;
+	}
+
+	@Override
+	public Page<Appointment> allAppointment(int page, int size) {
+		Sort sort = Sort.by("time");
+		Pageable pageable = PageRequest.of(page, size,sort);
+		LocalDate dt = LocalDate.now();
+		return appointmentRepository.findByDate(dt,pageable);
+	}
+
+	@Override
+	public Page<Appointment> pendingAppointment(int page, int size) {
+		Sort sort = Sort.by("time");
+		Pageable pageable = PageRequest.of(page, size,sort);
+		String status = "Pending";
+		LocalDate dt = LocalDate.now();
+		return appointmentRepository.findByDateAndStatus(dt,status,pageable);
+	}
+
+	@Override
+	public Page<Appointment> completedAppointment(int page, int size) {
+		Sort sort = Sort.by("time");
+		Pageable pageable = PageRequest.of(page, size, sort);
+		String status = "Completed";
+		LocalDate dt = LocalDate.now();
+		return appointmentRepository.findByDateAndStatus(dt,status,pageable);
+	}
+
+	@Override
+	public boolean cancleAppointment(int patientId) {
+		String status = "cancelled";
+		if( appointmentRepository.existsById(patientId)) {
+			 Optional<Appointment> optional = appointmentRepository.findById(patientId);
+			 if(optional.isPresent()) {
+				 Appointment appointment = optional.get();
+				 appointment.setStatus(status);
+				 return true;
+			 }
+			 return false;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateAppointment(int patientId, String status) {
+//		String status = "Completed";
+		if( appointmentRepository.existsById(patientId)) {
+			 Optional<Appointment> optional = appointmentRepository.findByPatientId(patientId);
+			 System.out.println(optional.get());
+			 if(optional.isPresent()) {
+				 Appointment appointment = optional.get();
+				 appointment.setStatus(status);
+				 return true;
+			 }
+			 return false;
+		}else {
+			return false;
+		}
+	}
+
+}

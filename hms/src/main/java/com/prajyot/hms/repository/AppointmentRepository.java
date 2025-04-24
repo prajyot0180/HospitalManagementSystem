@@ -19,4 +19,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
 	Optional<Appointment> findByPatientId(int patientId);
 
+	long countByStatus(String string);
+
+	long countByDate(LocalDate now);
+
+	long countBySession(String string);
+
 }
