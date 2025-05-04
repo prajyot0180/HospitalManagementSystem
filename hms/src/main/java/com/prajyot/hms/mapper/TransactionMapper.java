@@ -13,8 +13,8 @@ public class TransactionMapper {
 
         TransactionDTO dto = new TransactionDTO();
         dto.setTransactionId(transaction.getTransactionId());
-        if (transaction.getBilling() != null) {
-            dto.setBillId(transaction.getBilling().getBillId());  // Storing only the billId
+        if (transaction.getBillingId() != null) {
+            dto.setBillId(transaction.getBillingId());  // Storing only the billId
         }
         dto.setAmountPaid(transaction.getAmountPaid());
         dto.setPaymentDate(transaction.getPaymentDate());

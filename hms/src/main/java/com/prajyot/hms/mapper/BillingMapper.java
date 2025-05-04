@@ -13,7 +13,7 @@ public class BillingMapper {
 
         BillingDTO billingDTO = new BillingDTO();
         billingDTO.setBillId(billing.getBillId());
-        billingDTO.setPatientId(billing.getPatient() != null ? billing.getPatient().getPatientId() : null);
+        billingDTO.setPatientId(billing.getPatientId());// != null ? billing.getPatient().getPatientId() : null);
         billingDTO.setAmount(billing.getAmount());
         billingDTO.setPaymentMode(billing.getPaymentMode());
         billingDTO.setStatus(billing.getStatus());

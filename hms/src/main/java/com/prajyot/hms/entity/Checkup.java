@@ -11,13 +11,8 @@ public class Checkup {
     @Column(name = "checkupid")
     private Integer checkupId;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "appointmentid",
-        referencedColumnName = "appointmentid",
-        foreignKey = @ForeignKey(name = "checkup_appointmentid_fkey")
-    )
-    private Appointment appointment;
+    @Column(name = "appointmentid")
+    private Integer appointmentId;
 
     @Column(name = "symptoms")
     private String symptoms;
@@ -28,8 +23,6 @@ public class Checkup {
     @Column(name = "testsuggested")
     private String testSuggested;
 
-    // Getters and Setters
-
     public Integer getCheckupId() {
         return checkupId;
     }
@@ -38,12 +31,12 @@ public class Checkup {
         this.checkupId = checkupId;
     }
 
-    public Appointment getAppointment() {
-        return appointment;
+    public Integer getAppointmentId() {
+        return appointmentId;
     }
 
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
+    public void setAppointment(Integer appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public String getSymptoms() {

@@ -10,10 +10,9 @@ public class MedicinePreparationMapper {
         if (medicinePreparation == null) {
             return null;
         }
-
         MedicinePreparationDTO dto = new MedicinePreparationDTO();
         dto.setPrepId(medicinePreparation.getPrepId());
-        dto.setMedicineId(medicinePreparation.getMedicine().getMedicineId());  // Reference to the Medicine entity
+        dto.setMedicineId(medicinePreparation.getMedicineId());  // Reference to the Medicine entity
         dto.setDoses(medicinePreparation.getDoses());
         dto.setStatus(medicinePreparation.getStatus());
 

@@ -1,0 +1,34 @@
+package com.prajyot.hms.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.prajyot.hms.entity.Receptionist;
+import com.prajyot.hms.repository.ReceptionistRepository;
+import com.prajyot.hms.serviceInterface.ReceptionistServiceInterface;
+
+@Service
+public class ReceptionistService  implements ReceptionistServiceInterface{
+
+	@Autowired
+	ReceptionistRepository receptionistRepository;
+	
+	@Override
+	public boolean addReceptionist(Receptionist receptionist) {
+		Receptionist addReceptionist = receptionistRepository.save(receptionist);
+		return addReceptionist != null;
+	}
+
+	@Override
+	public boolean updateReceptionist(Receptionist oldReceptionist) {
+		Optional<Receptionist> optional = receptionistRepository.findById(oldReceptionist.getReceptionistId()); 
+		Receptionist newReceptionist = optional.get();
+		newReceptionist.setName(oldReceptionist.getName());
+		
+		Receptionist CheckUpdated = receptionistRepository.save(newReceptionist);
+		return CheckUpdated != null;
+	}
+
+}

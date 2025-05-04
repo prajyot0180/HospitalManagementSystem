@@ -12,9 +12,8 @@ public class Billing {
     @Column(name = "billid")
     private Integer billId;
 
-    @ManyToOne
-    @JoinColumn(name = "patientid", referencedColumnName = "patientid", foreignKey = @ForeignKey(name = "billing_patientid_fkey"))
-    private Patient patient;
+    @Column(name = "patientid")
+    private Integer patientId;
 
     @Column(name = "amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
@@ -23,9 +22,8 @@ public class Billing {
     private String paymentMode;
 
     @Column(name = "status")
-    private String status = "Pending";  // Default value
+    private String status = "Unpaid";  // Default value
 
-    // Getters and Setters
 
     public Integer getBillId() {
         return billId;
@@ -35,12 +33,12 @@ public class Billing {
         this.billId = billId;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatient(Integer patientId) {
+        this.patientId = patientId;
     }
 
     public BigDecimal getAmount() {

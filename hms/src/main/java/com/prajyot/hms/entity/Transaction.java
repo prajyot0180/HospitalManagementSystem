@@ -13,9 +13,8 @@ public class Transaction {
     @Column(name = "transactionid")
     private Integer transactionId;
 
-    @ManyToOne
-    @JoinColumn(name = "billid", referencedColumnName = "billid", foreignKey = @ForeignKey(name = "transactions_billid_fkey"))
-    private Billing billing;
+    @Column(name = "billid")
+    private Integer billingId;
 
     @Column(name = "amountpaid", nullable = false, precision = 10, scale = 2)
     private BigDecimal amountPaid;
@@ -36,12 +35,12 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public Billing getBilling() {
-        return billing;
+    public Integer getBillingId() {
+        return billingId;
     }
 
-    public void setBilling(Billing billing) {
-        this.billing = billing;
+    public void setBillingId(Integer billingId) {
+        this.billingId = billingId;
     }
 
     public BigDecimal getAmountPaid() {

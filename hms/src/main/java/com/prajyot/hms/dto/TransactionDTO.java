@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class TransactionDTO {
 
     private Integer transactionId;
-    private Integer billId;  // To link to Billing in DTO form
+    private Integer billId;  
     private BigDecimal amountPaid;
     private LocalDate paymentDate;
     private String paymentMode;

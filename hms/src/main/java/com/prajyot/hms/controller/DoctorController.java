@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.prajyot.hms.entity.Appointment;
 import com.prajyot.hms.entity.Doctor;
 import com.prajyot.hms.entity.Patient;
+import com.prajyot.hms.entity.Receptionist;
 import com.prajyot.hms.serviceInterface.AppointmentServiceInterface;
 import com.prajyot.hms.serviceInterface.DoctorServiceInterface;
 import com.prajyot.hms.serviceInterface.PatientServiceInterface;
+import com.prajyot.hms.serviceInterface.ReceptionistServiceInterface;
 
 @RestController
 @RequestMapping("/doctor")
@@ -33,6 +35,9 @@ public class DoctorController {
 	
 	@Autowired
 	DoctorServiceInterface doctortServiceInterface;
+	
+	@Autowired
+	ReceptionistServiceInterface receptionistServiceInterface;
 	
 	@PostMapping("/addPatient")
 	public ResponseEntity<?> addPatient(@RequestBody Patient patient){
@@ -139,6 +144,35 @@ public class DoctorController {
 	public ResponseEntity<?> updateDoctor(@RequestBody Doctor doctor){
 		try {
 			boolean result = doctortServiceInterface.updateDoctor(doctor);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Doctor Added");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not Added!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+
+	@PostMapping("/addReceptionist")
+	public ResponseEntity<?> addReceptionist(@RequestBody Receptionist receptionist){
+		try {
+			boolean result = receptionistServiceInterface.addReceptionist(receptionist);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Doctor Added");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doctor not Added!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@PostMapping("/updateReceptionist")
+	public ResponseEntity<?> updateReceptionist(@RequestBody Receptionist receptionist){
+		try {
+			boolean result = receptionistServiceInterface.updateReceptionist(receptionist);
 			if(result) {
 				 return ResponseEntity.status(HttpStatus.OK).body("Doctor Added");
 			}else {

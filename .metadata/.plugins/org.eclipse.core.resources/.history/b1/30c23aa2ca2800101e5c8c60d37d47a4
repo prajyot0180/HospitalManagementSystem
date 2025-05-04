@@ -1,0 +1,26 @@
+package com.prajyot.hms.mapper;
+
+import com.prajyot.hms.entity.Transaction;
+import com.prajyot.hms.dto.TransactionDTO;
+
+public class TransactionMapper {
+
+    // Method to convert Transaction entity to TransactionDTO
+    public static TransactionDTO toDTO(Transaction transaction) {
+        if (transaction == null) {
+            return null;
+        }
+
+        TransactionDTO dto = new TransactionDTO();
+        dto.setTransactionId(transaction.getTransactionId());
+        if (transaction.getBilling() != null) {
+            dto.setBillId(transaction.getBilling().getBillId());  // Storing only the billId
+        }
+        dto.setAmountPaid(transaction.getAmountPaid());
+        dto.setPaymentDate(transaction.getPaymentDate());
+        dto.setPaymentMode(transaction.getPaymentMode());
+
+        return dto;
+    }
+
+}

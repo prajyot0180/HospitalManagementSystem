@@ -11,21 +11,14 @@ public class MedicinePreparation {
     @Column(name = "prepid")
     private Integer prepId;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "medicineid", 
-        referencedColumnName = "medicineid", 
-        foreignKey = @ForeignKey(name = "medicinepreparation_medicineid_fkey")
-    )
-    private Medicine medicine;
+    @Column(name = "medicineid")
+    private int medicineId;
 
     @Column(name = "doses", nullable = false)
     private Integer doses;
 
     @Column(name = "status")
     private String status = "Pending";  // Default value
-
-    // Getters and Setters
 
     public Integer getPrepId() {
         return prepId;
@@ -35,12 +28,12 @@ public class MedicinePreparation {
         this.prepId = prepId;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
+    public int getMedicineId() {
+        return medicineId;
     }
 
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
+    public void setMedicineId(Integer medicineId) {
+        this.medicineId = medicineId;
     }
 
     public Integer getDoses() {

@@ -13,8 +13,8 @@ public class TestMapper {
 
         TestDTO dto = new TestDTO();
         dto.setTestId(test.getTestId());
-        if (test.getPatient() != null) {
-            dto.setPatientId(test.getPatient().getPatientId()); // Storing only the patientId
+        if (test.getPatientId() != null) {
+            dto.setPatientId(test.getPatientId()); // Storing only the patientId
         }
         dto.setTestName(test.getTestName());
         dto.setDateScheduled(test.getDateScheduled());

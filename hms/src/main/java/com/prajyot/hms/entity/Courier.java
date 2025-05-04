@@ -12,21 +12,11 @@ public class Courier {
     @Column(name = "courierid")
     private Integer courierId;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "patientid", 
-        referencedColumnName = "patientid", 
-        foreignKey = @ForeignKey(name = "courier_patientid_fkey")
-    )
-    private Patient patient;
+    @JoinColumn(name = "patientid")
+    private Integer patientId;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "medicineid", 
-        referencedColumnName = "medicineid", 
-        foreignKey = @ForeignKey(name = "courier_medicineid_fkey")
-    )
-    private Medicine medicine;
+    @JoinColumn(name = "medicineid")
+    private Integer medicineId;
 
     @Column(name = "deliverydate")
     private LocalDate deliveryDate;
@@ -44,20 +34,20 @@ public class Courier {
         this.courierId = courierId;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatient(Integer patientId) {
+        this.patientId = patientId;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
+    public Integer getMedicineId() {
+        return medicineId;
     }
 
-    public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
+    public void setMedicine(Integer medicineId) {
+        this.medicineId = medicineId;
     }
 
     public LocalDate getDeliveryDate() {

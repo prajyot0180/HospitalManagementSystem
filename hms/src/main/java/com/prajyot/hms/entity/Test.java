@@ -12,9 +12,8 @@ public class Test {
     @Column(name = "testid")
     private Integer testId;
 
-    @ManyToOne
-    @JoinColumn(name = "patientid", referencedColumnName = "patientid", foreignKey = @ForeignKey(name = "test_patientid_fkey"))
-    private Patient patient;
+    @Column(name = "patientid")
+    private Integer patientId;
 
     @Column(name = "testname", nullable = false)
     private String testName;
@@ -32,12 +31,12 @@ public class Test {
         this.testId = testId;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatient(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getTestName() {

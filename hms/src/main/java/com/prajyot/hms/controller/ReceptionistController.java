@@ -1,0 +1,286 @@
+package com.prajyot.hms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.prajyot.hms.entity.Appointment;
+import com.prajyot.hms.entity.Patient;
+import com.prajyot.hms.serviceInterface.AppointmentServiceInterface;
+import com.prajyot.hms.serviceInterface.DoctorServiceInterface;
+import com.prajyot.hms.serviceInterface.PatientServiceInterface;
+import com.prajyot.hms.serviceInterface.ReceptionistServiceInterface;
+
+@RestController
+@RequestMapping("/receptionist")
+@CrossOrigin("*")
+public class ReceptionistController {
+
+	@Autowired
+	PatientServiceInterface patientServiceInterface;
+	 
+	@Autowired
+	AppointmentServiceInterface appointmentServiceInterface;
+	
+	@Autowired
+	DoctorServiceInterface doctortServiceInterface;
+	
+	@Autowired
+	ReceptionistServiceInterface receptionistServiceInterface;
+	
+	@PostMapping("/addPatient")
+	public ResponseEntity<?> addPatient(@RequestBody Patient patient){
+		try {
+			boolean result = patientServiceInterface.addPatient(patient);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Patient Added");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not Added!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@PostMapping("/updatePatient")
+	public ResponseEntity<?> updatePatient(@RequestBody Patient patient){
+		try {
+			boolean result = patientServiceInterface.updatePatient(patient);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Patient updated");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not updated!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@PostMapping("/deletePatient/{id}")
+	public ResponseEntity<?> deletePatient(@RequestParam int id){
+		try {
+			boolean result = patientServiceInterface.deletePatient(id);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Patient deleted");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not deleted!!");
+			}
+		}catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/allPatients")
+	public ResponseEntity<?> getAllPatients(@RequestParam(defaultValue = "0")  int page ,@RequestParam(defaultValue = "10") int size){
+		try {
+			Page<Patient> patients = patientServiceInterface.getAllPatients(page,size);
+			if(!patients.isEmpty()) {
+				return ResponseEntity.ok(patients);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No records!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/patient/{name}")
+	public ResponseEntity<?> getPatientByName(@PathVariable String name,@RequestParam(defaultValue = "0") int page ,@RequestParam(defaultValue = "10") int size){
+		try {
+			Page<Patient> patients = patientServiceInterface.getPatientByName(name,page,size);
+			if(!patients.isEmpty()) {
+				return ResponseEntity.ok(patients);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No records!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/getBirthdayPatient")
+	public ResponseEntity<?> getBirthdayPatient(@RequestParam(defaultValue = "0")  int page ,@RequestParam(defaultValue = "5") int size){
+		try {
+			Page<Patient> patients = patientServiceInterface.getBirthdayPatient(page,size);
+			if(!patients.isEmpty()) {
+				return ResponseEntity.ok(patients);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No one's birthday!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	
+	@PostMapping("/bookAppointment")
+	public ResponseEntity<?> bookAppointment(@RequestBody Appointment appointment){
+		try {
+			boolean result = appointmentServiceInterface.bookAppointment(appointment);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Appointment Booked");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Appointment not Booked!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/allAppointment")
+	public ResponseEntity<?> allAppointment(@RequestParam(defaultValue = "0")  int page ,@RequestParam(defaultValue = "10") int size){
+		try {
+			Page<Appointment> appointments = appointmentServiceInterface.allAppointment(page,size);
+			if(!appointments.isEmpty()) {
+				return ResponseEntity.ok(appointments);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No appointments!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/pendingAppointment")
+	public ResponseEntity<?> pendingAppointment(@RequestParam(defaultValue = "0")  int page ,@RequestParam(defaultValue = "10") int size){
+		try {
+			Page<Appointment> appointments = appointmentServiceInterface.pendingAppointment(page,size);
+			if(!appointments.isEmpty()) {
+				return ResponseEntity.ok(appointments);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No pending appointments!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/completedAppointment")
+	public ResponseEntity<?> completedAppointment(@RequestParam(defaultValue = "0")  int page ,@RequestParam(defaultValue = "10") int size){
+		try {
+			Page<Appointment> appointments = appointmentServiceInterface.completedAppointment(page,size);
+			if(!appointments.isEmpty()) {
+				return ResponseEntity.ok(appointments);
+			}
+			else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No completed appointments!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@PostMapping("/cancleAppointment")
+	public ResponseEntity<?> cancleAppointment(@RequestParam int patientId) {
+		try {
+			boolean result = appointmentServiceInterface.cancleAppointment(patientId);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Appointment cancelled");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Appointment not cancelled!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@PostMapping("/updateAppointment/{patientId}/{status}")
+	public ResponseEntity<?> updateAppointment(@PathVariable int patientId,@PathVariable String status){
+		try {
+			boolean result = appointmentServiceInterface.updateAppointment(patientId,status);
+			if(result) {
+				 return ResponseEntity.status(HttpStatus.OK).body("Appointment updated");
+			}else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Appointment not updated!!");
+			}
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+
+	@GetMapping("/totalAppointments")
+	public ResponseEntity<?> totalAppointment(){
+		try {
+			long result = appointmentServiceInterface.totalAppointment();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/totalPatients")
+	public ResponseEntity<?> totalPatients(){
+		try {
+			long result = patientServiceInterface.totalPatients();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/remAppointment")
+	public ResponseEntity<?> remainingAppointment(){
+		try {
+			long result = appointmentServiceInterface.remainingAppointment();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/compAppointment")
+	public ResponseEntity<?> checkedAppointment(){
+		try {
+			long result = appointmentServiceInterface.checkedAppointment();
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/todaysTotalAppointment")
+	public ResponseEntity<?> todaysTotalAppointment(){
+		try {
+			long result = appointmentServiceInterface.todaysTotalAppointment();
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	@GetMapping("/morningAppointment")
+	public ResponseEntity<?> morningAppointment(){
+		try {
+			long result = appointmentServiceInterface.morningAppointment();
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+	
+	
+	
+	@GetMapping("/eveningAppointment")
+	public ResponseEntity<?> eveningAppointment(){
+		try {
+			long result = appointmentServiceInterface.eveningAppointment();
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Exception");
+		}
+	}
+}

@@ -12,7 +12,7 @@ public class CheckupMapper {
 
         CheckupDTO checkupDTO = new CheckupDTO();
         checkupDTO.setCheckupId(checkup.getCheckupId());
-        checkupDTO.setAppointmentId(checkup.getAppointment() != null ? checkup.getAppointment().getAppointmentId() : null);
+        checkupDTO.setAppointmentId(checkup.getAppointmentId() );//!= null ? checkup.getAppointment().getAppointmentId() : null);
         checkupDTO.setSymptoms(checkup.getSymptoms());
         checkupDTO.setMedicineGiven(checkup.getMedicineGiven());
         checkupDTO.setTestSuggested(checkup.getTestSuggested());

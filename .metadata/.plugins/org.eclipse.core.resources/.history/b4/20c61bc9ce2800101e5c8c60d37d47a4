@@ -1,0 +1,54 @@
+package com.prajyot.hms.dto;
+
+import java.math.BigDecimal;
+
+public class MedicineDTO {
+
+    private Integer medicineId;
+    private String name;
+    private Double price;
+    private String symptoms;
+    private Boolean stockAvailable;
+
+    // Getters and Setters
+
+    public Integer getMedicineId() {
+        return medicineId;
+    }
+
+    public void setMedicineId(Integer medicineId) {
+        this.medicineId = medicineId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getSymptoms() {
+        return symptoms;
+    }
+
+    public void setSymptoms(String symptoms) {
+        this.symptoms = symptoms;
+    }
+
+    public Boolean getStockAvailable() {
+        return stockAvailable;
+    }
+
+    public void setStockAvailable(Boolean stockAvailable) {
+        this.stockAvailable = stockAvailable;
+    }
+}

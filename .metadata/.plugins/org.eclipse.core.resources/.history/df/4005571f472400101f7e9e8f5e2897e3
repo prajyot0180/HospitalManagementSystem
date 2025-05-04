@@ -1,0 +1,10 @@
+package com.prajyot.hms.service;
+
+import org.springframework.stereotype.Service;
+
+import com.prajyot.hms.serviceInterface.ReceptionistServiceInterface;
+
+@Service
+public class ReceptionistService  implements ReceptionistServiceInterface{
+
+}

@@ -13,8 +13,8 @@ public class CourierMapper {
 
         CourierDTO courierDTO = new CourierDTO();
         courierDTO.setCourierId(courier.getCourierId());
-        courierDTO.setPatientId(courier.getPatient() != null ? courier.getPatient().getPatientId() : null);
-        courierDTO.setMedicineId(courier.getMedicine() != null ? courier.getMedicine().getMedicineId() : null);
+        courierDTO.setPatientId(courier.getPatientId());// != null ? courier.getPatient().getPatientId() : null);
+        courierDTO.setMedicineId(courier.getMedicineId());// != null ? courier.getMedicine().getMedicineId() : null);
         courierDTO.setDeliveryDate(courier.getDeliveryDate());
         courierDTO.setStatus(courier.getStatus());
 
